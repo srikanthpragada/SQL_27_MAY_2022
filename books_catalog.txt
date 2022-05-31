@@ -1,0 +1,19 @@
+Books Catalog
+=============
+Publishers  - id, name, email, phone 
+Topics - id, name
+Authors - id, name, email, phone 
+Titles  - isbn, title, publisher, topic, release date, cover type, price in INR
+TitleAuthors  - isbn, author 
+
+
+Notes:
+------
+1. Each table must have a primary key
+2. Cover type of a title is either H - hard cover or P - Paper back
+3. Price of book is an integer
+4. All ids and isbn are integers and autoincrement 
+5. A single title may have many authors
+6. Email address must be unique in each table 
+
+

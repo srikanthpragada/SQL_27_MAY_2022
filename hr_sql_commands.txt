@@ -1,0 +1,80 @@
+CREATE TABLE jobs (
+    id    CHAR (2)     PRIMARY KEY,
+    title VARCHAR (30) NOT NULL
+);
+
+insert into jobs values('PR', 'Programmer');
+insert into jobs values('TL', 'Team Lead');
+insert into jobs values('HM', 'HR Manager');
+insert into jobs values('AC', 'Accountant');
+insert into jobs values('ME', 'Marketting Executive');
+
+
+create table departments
+(
+    id    CHAR (2)     PRIMARY KEY,
+    name  VARCHAR (30) NOT NULL
+);
+
+
+insert into departments values('IT', 'Information Technology');
+insert into departments values('HR', 'Human Resource');
+insert into departments values('AC', 'Accounts');
+insert into departments values('MR', 'Marketting');
+
+
+CREATE TABLE employees (
+    id            INTEGER      PRIMARY KEY AUTOINCREMENT,
+    fullname      VARCHAR (30) NOT NULL,
+    email         VARCHAR (30) UNIQUE,
+    job_id        CHAR (2)     REFERENCES jobs (id),
+    department_id CHAR (2)     REFERENCES departments (id),
+    salary        integer,
+    joinedon      date
+);
+
+insert into employees(fullname, email, job_id, department_id,salary, joinedon)
+     values('Larry Ellison','larry@gmail.com','HM','HR',600000, '2020-01-10');
+
+insert into employees(fullname, email, job_id, department_id,salary, joinedon)
+     values('Jason Hunter','hunter@gmail.com','PR','IT',700000, '2021-02-11')
+
+insert into employees(fullname, email, job_id, department_id,salary, joinedon)
+     values('Billy Joy','billy@gmail.com','PR','IT',650000, '2020-10-10');
+
+
+insert into employees(fullname, email, job_id, department_id,salary, joinedon)
+     values('Tina Turner','tina@gmail.com','AC','AC',450000, '2020-11-01');
+
+
+insert into employees(fullname, email, job_id, department_id,salary, joinedon)
+     values('Tom Hanks','tom@gmail.com','ME','MR',550000, '2021-01-05');
+
+
+insert into employees(fullname, email, job_id, department_id,salary, joinedon)
+     values('Bob Tabour','bob@gmail.com','PR','IT',750000, '2021-03-10');
+
+
+insert into employees(fullname, email, job_id, department_id,salary, joinedon)
+     values('Larry Page','page@gmail.com','TL','IT',1550000, '2022-02-10');
+
+
+
+CREATE TABLE payroll (
+    employee_id   INTEGER  References employees(id),
+    paidon        date,
+    basic         integer,
+    hra           integer,
+    tax           integer,
+    pf            integer,
+    primary key (employee_id, paidon)
+);
+
+CREATE TABLE leaves (
+    id              integer  primary key autoincrement,
+    employee_id     INTEGER  References employees(id),
+    leavedate       date,
+    leavetype       char(1) check (leavetype in ('s','v','c')),
+    remarks         varchar(50),
+);
+
