@@ -1,0 +1,32 @@
+01-JUN-2022
+===========
+Display unique salaries of employees in department IT
+
+Display employees who are in department HR or having salary > 500000
+
+Display leaves of type sick and casual 
+
+Display employees where department is either HR or IT and 
+salary < 800000
+
+Display employees with ids 3 or 5 or 6 to 8
+
+Display employees where name has t as last-but-one char
+
+Display employees working in dept where id starts with I 
+and name of employee contains two ls.
+
+
+
+Commands
+=========
+insert into employees (fullname, job_id)
+  values('Bill Gates', 'TL')
+
+select * 
+from employees
+where department_id is null
+
+select * 
+from employees
+where fullname like '_o%'
