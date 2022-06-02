@@ -59,7 +59,6 @@ insert into employees(fullname, email, job_id, department_id,salary, joinedon)
      values('Larry Page','page@gmail.com','TL','IT',1550000, '2022-02-10');
 
 
-
 CREATE TABLE payroll (
     employee_id   INTEGER  References employees(id),
     paidon        date,
@@ -75,6 +74,6 @@ CREATE TABLE leaves (
     employee_id     INTEGER  References employees(id),
     leavedate       date,
     leavetype       char(1) check (leavetype in ('s','v','c')),
-    remarks         varchar(50),
+    remarks         varchar(50)
 );
 

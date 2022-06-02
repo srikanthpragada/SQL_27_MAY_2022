@@ -13,9 +13,16 @@ Display employees with ids 3 or 5 or 6 to 8
 
 Display employees where name has t as last-but-one char
 
-Display employees working in dept where id starts with I 
-and name of employee contains two ls.
+select * 
+from employees
+where fullname like '%e_'
 
+Display employees working in dept where id starts with I 
+and name of employee contains l twice.
+
+select * 
+from employees
+where fullname like '%l%l%' and department_id like 'I%'
 
 
 Commands
@@ -30,3 +37,26 @@ where department_id is null
 select * 
 from employees
 where fullname like '_o%'
+
+
+02-JUN-2022
+===========
+Display employees in the asc order of job and then joining date
+
+Rename col description in jobs table to remarks 
+
+Add gender to employees with check constrint for values m and f
+
+Update gender col to 'm'
+
+Update gender for some employees to 'f'
+
+Commands
+---------
+select * 
+from employees
+where salary is not null 
+order by department_id, salary desc
+
+update employees set salary = salary + 100000 
+where id = 3
