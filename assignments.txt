@@ -60,3 +60,46 @@ order by department_id, salary desc
 
 update employees set salary = salary + 100000 
 where id = 3
+
+
+03-JUN-2022
+===========
+update email with name without spaces followed @gmail.com 
+for employees where email is null
+
+Delete rows from employees where email is null
+
+Display employees where length of name is > 10 and name 
+contains space 
+
+Display everything from space in name 
+
+Find out month of joining for each employee without using strftime()
+
+Display empname, joinedon, exp in years, 
+category - Senior if exp  > 2 years
+else junior 
+
+Display employees where year of joining is previous year 
+
+
+Commands
+========
+ALTER TABLE JOBS rename column DESCRIPTION to remarks
+
+SELECT  ltrim('***....abc**','*.')
+
+SELECT joinedon, strftime('%d-%m-%Y', joinedon)
+from employees
+
+SELECT  ifnull(email, 'Unknown') email
+from employees
+
+SELECT fullname, salary, iif(salary > 500000, 'High','Low') category
+from employees
+
+begin transaction;
+update employees set salary = salary * 1.1 
+where salary < 1000000;
+select changes()
+rollback;
