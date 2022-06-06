@@ -179,3 +179,67 @@ select job_id
 from employees
 group by job_id 
 having count(*) > 2
+
+06-JUN-2022
+=============
+
+Assignments
+------------
+Disp emp name, leave type and leave date 
+
+Disp emp name, salary, dept name, joinedon for all programmers
+
+Disp emp name, no. of leave taken so far
+
+Disp leave id, emp name, department name, leave type, leave date 
+
+Disp job title where avg salary > 7500000
+
+Disp name of employees who have been paid more than 50L so far
+
+Disp emp name and no.of leaves taken - include employees who have not taken any leave.
+
+Commands
+----------
+SELECT NAME, FULLNAME
+FROM EMPLOYEES E JOIN DEPARTMENTS D
+ON (E.DEPARTMENT_ID = D.ID)
+
+SELECT fullname, salary, j.id, title 
+FROM EMPLOYEES E JOIN jobs j
+ON (E.job_id = j.id)
+
+SELECT fullname, salary, title 
+FROM EMPLOYEES E JOIN jobs j ON (E.job_id = j.id)
+where salary > 500000
+
+
+SELECT d.name, avg(salary)
+FROM EMPLOYEES e join departments d on (d.id = e.department_id)
+group by d.name
+
+SELECT e.fullname Employee, d.name Department, j.title Job
+FROM EMPLOYEES e join departments d on (d.id = e.department_id) 
+join jobs j on (j.id = e.job_id)
+
+SELECT  name
+FROM EMPLOYEES e join departments d on (e.department_id = d.id)
+group by name
+having count(*) > 2 
+
+SELECT fullname, name
+FROM EMPLOYEES e join departments d on (e.department_id = d.id)
+order by 1
+
+select title, fullname
+from jobs left outer join employees on (jobs.id = employees.job_id)
+
+select title, count(*)
+from jobs join employees on (jobs.id = employees.job_id)
+group by title
+
+select title, count(employees.id)
+from jobs left outer join employees on (jobs.id = employees.job_id)
+group by title
+order by 2 desc
+
