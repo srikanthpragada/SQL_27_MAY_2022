@@ -243,3 +243,91 @@ from jobs left outer join employees on (jobs.id = employees.job_id)
 group by title
 order by 2 desc
 
+
+07-JUN-2022
+===========
+
+assignments
+===========
+Disp emp with lowest salary
+
+Disp employees who have taken a sick leave
+
+Disp employees whose HRA is > 50000
+
+Disp employees who have taken more than 10 leaves
+
+Disp leaves taken by employees in HR dept 
+
+Disp leaves taken by IT emp or employees who joined in 2021
+
+Disp employees who have been paid more than 50,00,000 in the
+form of basic salary 
+
+Disp employees who haven't taken any leave 
+
+Disp jobs in which more than 2 employees took sick leave 
+
+
+
+Commands
+=========
+select count(*)
+from employees
+where strftime('%Y', joinedon) =  strftime('%Y',date('now','-1 year'))
+
+select count(*)
+from employees
+where cast(strftime('%Y', joinedon) as integer) 
+     =  strftime('%Y',date('now')) - 1
+
+
+select * 
+from employees
+where department_id = 
+ (select id
+  from departments
+  where name = 'Human Resource')
+
+select * 
+from employees
+where salary <
+ (select avg(salary)
+  from employees)
+
+select * 
+from jobs
+where id in (
+  select distinct job_id
+  from employees
+  where salary > 700000)
+
+
+select * 
+from departments
+where id in (
+  select department_id
+  from employees
+  group by department_id
+  having avg(salary) > 600000
+)
+
+
+SELECT * FROM EMPLOYEES
+WHERE JOB_ID IN
+ (SELECT ID FROM JOBS WHERE TITLE LIKE '%Manager%')
+AND DEPARTMENT_ID in
+ (SELECT ID FROM DEPARTMENTS WHERE NAME LIKE 'H%')
+
+
+select * 
+from jobs
+where id in 
+  (select job_id
+   from employees
+   where id in 
+    (select employee_id from leaves
+    where leavetype = 's')    
+  group by job_id
+  having count(*) > 2)
+  
