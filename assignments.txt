@@ -330,4 +330,49 @@ where id in
     where leavetype = 's')    
   group by job_id
   having count(*) > 2)
+
+
+08-JUN-2022
+===========
+
+
+Commands
+----------
+select * from employees
+where id in
+ ( select employee_id
+   from  payroll
+   group by employee_id
+   having sum(basic) > 200000)
+
+
+select * from employees
+where id not in
+  (select distinct employee_id
+   from leaves)
+
   
+
+select * 
+from leaves 
+where employee_id in
+   (
+    select id from employees
+    where department_id = 'IT')
+  or employee_id in
+    (
+    select id from employees
+    where strftime('%Y', joinedon) = '2021' 
+    )
+
+
+select * 
+from leaves 
+where employee_id in
+   (
+    select id from employees
+    where department_id = 'IT'
+    union
+    select id from employees
+    where strftime('%Y', joinedon) = '2021' 
+  )
