@@ -334,7 +334,18 @@ where id in
 
 08-JUN-2022
 ===========
+Assignments
+-----------
+Change salary of employee 4 to salary of employee 6
 
+Create a new table - dept_summary that contains department name,
+no. of emp, total salary and max salary 
+
+Disp employees where salary is least in the job
+
+Disp 3 most recently joined employees
+
+Disp 2 dept with highest avg salaries 
 
 Commands
 ----------
@@ -351,7 +362,7 @@ where id not in
   (select distinct employee_id
    from leaves)
 
-  
+
 
 select * 
 from leaves 
@@ -376,3 +387,78 @@ where employee_id in
     select id from employees
     where strftime('%Y', joinedon) = '2021' 
   )
+
+
+select * 
+from employees main
+where salary = 
+  (select max(salary)
+   from employees
+   where department_id = main.department_id)
+
+
+
+select * from employees
+order by salary desc
+limit 4
+
+select distinct salary 
+from employees
+order by salary desc
+limit 4
+
+select *
+from employees
+order by salary desc
+limit 3  offset 2
+
+
+09-JUN-2022
+===========
+
+
+commands
+========
+select *
+from employees
+order by joinedon desc
+limit 3
+
+select * from departments
+where id in
+(
+select department_id
+from employees
+group by department_id
+order by avg(salary) desc
+limit 2
+)
+
+
+create view it_employees
+as
+select * 
+from employees
+where department_id = 'IT'
+
+select * 
+from it_employees
+
+
+create view dept_summary
+as
+select name, avg(salary) avg_salary 
+from employees e join departments d on (d.id = e.department_id)
+group by name 
+
+
+select * from dept_summary
+
+
+create index idx_employees_fullname
+on employees(fullname)
+
+
+explain query plan
+select * from employees
+where fullname = 'Abc'
